@@ -8,11 +8,12 @@
     "email": "theophile.cathelin@gmail.com"
   },
   "repository": {
-    "type" : "git",
-    "url" : "https://github.com/theoscat/hapiTCN.git"
+    "type": "git",
+    "url": "https://github.com/theoscat/hapiTCN.git"
   },
   "dependencies": {
     "dotenv": "^5.0.1",
-    "hapi": "^13.4.1"
+    "hapi": "^13.4.1",
+    "joi": "^13.1.2"
   }
 }
