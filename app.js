@@ -52,6 +52,49 @@ server.route({
 });
 
 
+// wait the required amount of time then sort the input array
+function waitAndSort(inArray, next){
+    delay().then(function(){
+        next(undefined, inArray.sort((a,b) => { return b - a; } ));
+    }).catch(function(err){
+        next(err);
+    });
+}
+
+server.method('waitAndSort', waitAndSort, {
+    cache: {
+        expiresIn: 30000,
+        generateTimeout: 16000
+    },
+    generateKey: function(opts) {
+        return JSON.stringify(opts);
+    }
+});
+
+// THIRD ROUTE
+server.route({
+    method: 'POST',
+    path: '/cache',
+    handler: (request, reply) => {
+        let inArray = request.payload.inArray;
+        server.methods.waitAndSort(inArray, function(err, outArray) {
+            if(!err){
+                return reply({ outArray: outArray }).header('Content-Type', 'application/json');
+            } else {
+                //TODO global error handling
+                return reply(err);
+            }
+        });
+    },
+    config: {
+        validate: {
+            payload: {
+                inArray: Joi.array().items(Joi.number().integer().required()).required()
+            }
+        }
+    }
+});
+
 server.start(function(err){
     if(err){
         console.error(err);
