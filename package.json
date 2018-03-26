@@ -3,8 +3,16 @@
   "version": "0.0.1",
   "description": "Test hapi",
   "license": "UNLICENSED",
-  "repository": "",
+  "author": {
+    "name": "Theophile Cathelin",
+    "email": "theophile.cathelin@gmail.com"
+  },
+  "repository": {
+    "type" : "git",
+    "url" : "https://github.com/theoscat/hapiTCN.git"
+  },
   "dependencies": {
-    
+    "dotenv": "^5.0.1",
+    "hapi": "^13.4.1"
   }
 }
